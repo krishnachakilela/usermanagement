@@ -18,6 +18,8 @@ import com.revision.usermanagment.dto.UserDTO;
 import com.revision.usermanagment.exception.UserException;
 import com.revision.usermanagment.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/revision")
 public class UserController {
@@ -26,7 +28,7 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/createUser")
-	public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO) throws UserException {
+	public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO userDTO) throws UserException {
 		String successMessage = userService.createUser(userDTO);
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}

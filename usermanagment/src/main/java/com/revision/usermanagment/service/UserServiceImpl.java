@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService {
 		if (userDTO == null) {
 			throw new UserException("User Details Are manadatory!");
 		}
-		Optional<User> userOptional = userRepository.findByEmailId(userDTO.getEmailId());
+		Optional<User> userOptional = userRepository.findByEmailIdAndUserName(userDTO.getEmailId(),userDTO.getUserName());
 		if (userOptional.isEmpty()) {
 			Integer userId = userRepository.save(UserDTO.convetDTOtoEntity(userDTO)).getUserId();
 			return "User is created Successfully with User Id = " + userId;
 		}
-		throw new UserException("User Already exist, try with different Email Id ");
+		throw new UserException("User Already exist, try with different Email Id and UserName");
 
 	}
 
