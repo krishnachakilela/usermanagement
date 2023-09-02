@@ -2,6 +2,9 @@ package com.revision.usermanagment.dto;
 
 import com.revision.usermanagment.entity.User;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +18,14 @@ import lombok.ToString;
 @ToString
 public class UserDTO {
 	Integer userId;
+	@NotNull(message = "First Name should not be null")
 	String firstName;
 	String lastName;
+	@Email(message = "Email ID is mandatory")
 	String emailId;
+	@NotNull(message="User Name should not be null")
 	String userName;
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "Password does not met the criteria")
 	String password;
 	
     public static User convetDTOtoEntity(UserDTO userDTO){
